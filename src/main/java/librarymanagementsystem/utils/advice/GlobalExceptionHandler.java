@@ -1,9 +1,7 @@
 package librarymanagementsystem.utils.advice;
 
 
-import librarymanagementsystem.utils.exceptions.BookNotAvailableException;
-import librarymanagementsystem.utils.exceptions.BookNotFoundException;
-import librarymanagementsystem.utils.exceptions.PatronNotFoundException;
+import librarymanagementsystem.utils.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,4 +23,18 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleBookNotAvailableException(BookNotAvailableException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
+    @ExceptionHandler(BorrowingNotFoundException.class)
+    public ResponseEntity<String> handleBorrowingNotFoundException(BorrowingNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+    @ExceptionHandler(ReturnDateExceededException.class)
+    public ResponseEntity<String> handleReturnDateExceededException(ReturnDateExceededException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+    @ExceptionHandler(PatronHasOverdueBooksException.class)
+    public ResponseEntity<String> handlePatronHasOverdueBooksException(PatronHasOverdueBooksException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+
 }

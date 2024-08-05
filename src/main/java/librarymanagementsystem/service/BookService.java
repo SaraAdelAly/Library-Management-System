@@ -30,10 +30,18 @@ public class BookService {
         return bookMapper.toDto(book);
     }
 
+    public Optional<Book> findBook (Integer id){
+        return bookRepo.findById(id);
+    }
+
     public BookDto SaveBook (BookDto bookDto) {
         Book book = bookMapper.toEntity(bookDto);
         Book savedBook = bookRepo.save(book);
         return bookMapper.toDto(savedBook);
+    }
+
+    public Book addBook(Book book){
+        return bookRepo.save(book);
     }
 
     public BookDto updateBook (Integer id, BookDto bookDetails){

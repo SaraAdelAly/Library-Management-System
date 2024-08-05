@@ -1,7 +1,7 @@
 package librarymanagementsystem.utils.advice;
 
 import librarymanagementsystem.entities.Book;
-import librarymanagementsystem.repositories.BookRepo;
+import librarymanagementsystem.service.BookService;
 import librarymanagementsystem.utils.exceptions.BookNotAvailableException;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class BookQuantityAspect {
 
-    private final BookRepo bookRepo;
+    private final BookService bookService;
 
 
     @Around(value = "execution(* librarymanagementsystem.service.BorrowingService.borrowBook(..)) && args(bookId, patronId)", argNames = "joinPoint,bookId,patronId")
     public Object aroundBorrowBook(ProceedingJoinPoint joinPoint, Integer bookId, Integer patronId) throws Throwable {
-        Book book = bookRepo.findById(bookId)
+        Book book = bookService.findBook(bookId)
                 .orElseThrow(() -> new BookNotAvailableException("Book not found"));
 
         if (book.getQuantity() <= 0) {
@@ -28,7 +28,7 @@ public class BookQuantityAspect {
 
         Object result = joinPoint.proceed();
         book.setQuantity(book.getQuantity() - 1);
-        bookRepo.save(book);
+        bookService.addBook(book);
         return result;
     }
 }
