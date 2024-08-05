@@ -55,6 +55,6 @@ public class BookService {
         }
         Book book = bookOptional.get();
         bookRepo.delete(book);
-        return ResponseEntity.ok("Speaker deleted successfully");
+        return ResponseEntity.ok("Book deleted successfully");
     }
 }
