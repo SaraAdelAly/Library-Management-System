@@ -28,6 +28,11 @@ public class Patron implements Serializable {
     @Column(name="phone_number",nullable = false)
     private String phoneNumber;
 
+
+    @Column(name="gender")
+    private String gender;
+
+
     @OneToMany(mappedBy = "patron")
     private Set<Borrowing> borrowings;
 

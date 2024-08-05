@@ -6,9 +6,11 @@ import librarymanagementsystem.mappers.BookMapper;
 import librarymanagementsystem.repositories.BookRepo;
 import librarymanagementsystem.utils.BookNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,30 +25,36 @@ public class BookService {
         return books.stream().map(bookMapper::toDto).toList();
     }
 
-    //handle throw done
-    //dto
-    //mappers
     public BookDto getBook (Integer id){
         Book book = bookRepo.findById(id).orElseThrow(()->new BookNotFoundException(id));
         return bookMapper.toDto(book);
     }
 
-    public BookDto SaveBook (Book book){
-        return bookMapper.toDto(bookRepo.save(book));
+    public BookDto SaveBook (BookDto bookDto) {
+        Book book = bookMapper.toEntity(bookDto);
+        Book savedBook = bookRepo.save(book);
+        return bookMapper.toDto(savedBook);
     }
 
-    public Book updateBook (Integer id, Book bookDetails){
-        return bookRepo.findById(id).map(book -> {
+    public BookDto updateBook (Integer id, BookDto bookDetails){
+        Book updatedBook= bookRepo.findById(id).map(book -> {
             book.setTitle(bookDetails.getTitle());
             book.setAuthor(bookDetails.getAuthor());
             book.setIsbn(bookDetails.getIsbn());
             book.setPublicationYear(bookDetails.getPublicationYear());
             return bookRepo.save(book);
         }).orElseThrow(() -> new BookNotFoundException(id));
+        return bookMapper.toDto(updatedBook);
     }
 
 
-    public void deleteBook (Integer id){
-        bookRepo.deleteById(id);
+    public ResponseEntity<String> deleteBook (Integer id){
+        Optional<Book> bookOptional = bookRepo.findById(id);
+        if (bookOptional.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        Book book = bookOptional.get();
+        bookRepo.delete(book);
+        return ResponseEntity.ok("Speaker deleted successfully");
     }
 }
