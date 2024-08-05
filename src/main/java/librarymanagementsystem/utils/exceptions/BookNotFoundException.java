@@ -1,4 +1,4 @@
-package librarymanagementsystem.utils;
+package librarymanagementsystem.utils.exceptions;
 
 public class BookNotFoundException extends RuntimeException{
 

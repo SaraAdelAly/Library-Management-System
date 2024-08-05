@@ -5,7 +5,7 @@ import librarymanagementsystem.dtos.PatronDto;
 import librarymanagementsystem.entities.Patron;
 import librarymanagementsystem.mappers.PatronMapper;
 import librarymanagementsystem.repositories.PatronRepo;
-import librarymanagementsystem.utils.PatronNotFoundException;
+import librarymanagementsystem.utils.exceptions.PatronNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

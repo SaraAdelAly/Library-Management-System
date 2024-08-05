@@ -4,7 +4,7 @@ import librarymanagementsystem.dtos.BookDto;
 import librarymanagementsystem.entities.Book;
 import librarymanagementsystem.mappers.BookMapper;
 import librarymanagementsystem.repositories.BookRepo;
-import librarymanagementsystem.utils.BookNotFoundException;
+import librarymanagementsystem.utils.exceptions.BookNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

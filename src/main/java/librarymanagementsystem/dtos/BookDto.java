@@ -1,6 +1,7 @@
 package librarymanagementsystem.dtos;
 
 import jakarta.validation.constraints.NotNull;
+import librarymanagementsystem.utils.annotations.PastDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,9 +24,8 @@ public class BookDto implements Serializable {
     @NotNull
     private String isbn;
     @NotNull
+    @PastDate(message = "Invalid publication Year")
     private LocalDate publicationYear;
     @NotNull
     private Integer quantity;
-
-
 }
