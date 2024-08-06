@@ -16,9 +16,4 @@ public interface PatronMapper {
     Patron toEntityFromCreatedPatron (CreatedPatron createdPatron);
     CreatedPatron toCreatedPatron(Patron patron);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Patron partialUpdate(PatronDto patronDto, @MappingTarget Patron patron);
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Patron partialUpdate(CreatedPatron patronDto, @MappingTarget Patron patron);
-
 }

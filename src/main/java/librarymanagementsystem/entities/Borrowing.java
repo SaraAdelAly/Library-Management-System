@@ -19,7 +19,7 @@ public class Borrowing implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "borrowing_id")
+    @Column(name = "borrowing_id",nullable = false)
     private Integer borrowingId;
 
     @Column(name="borrowing_date")

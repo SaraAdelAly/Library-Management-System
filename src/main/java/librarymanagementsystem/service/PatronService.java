@@ -37,7 +37,7 @@ public class PatronService {
         return patronMapper.toCreatedPatron(savedPatron);
     }
 
-    public CreatedPatron updateBook (Integer id, CreatedPatron createdPatron){
+    public CreatedPatron updatePatron (Integer id, CreatedPatron createdPatron){
         Patron updatedPatron= patronRepo.findById(id).map(patron -> {
             patron.setName(createdPatron.getName());
             patron.setEmail(createdPatron.getEmail());

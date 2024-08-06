@@ -22,7 +22,9 @@ public class BookService {
 
     public List<BookDto> getAllBooks(){
         List <Book> books= bookRepo.findAll();
+        System.out.println(books);
         return books.stream().map(bookMapper::toDto).toList();
+
     }
 
     public BookDto getBook (Integer id){
@@ -34,14 +36,14 @@ public class BookService {
         return bookRepo.findById(id);
     }
 
-    public BookDto SaveBook (BookDto bookDto) {
+    public BookDto saveBook (BookDto bookDto) {
         Book book = bookMapper.toEntity(bookDto);
         Book savedBook = bookRepo.save(book);
         return bookMapper.toDto(savedBook);
     }
 
-    public Book addBook(Book book){
-        return bookRepo.save(book);
+    public void addBook(Book book){
+        bookRepo.save(book);
     }
 
     public BookDto updateBook (Integer id, BookDto bookDetails){
@@ -56,13 +58,13 @@ public class BookService {
     }
 
 
-    public ResponseEntity<String> deleteBook (Integer id){
+    public void deleteBook (Integer id){
         Optional<Book> bookOptional = bookRepo.findById(id);
         if (bookOptional.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            ResponseEntity.notFound().build();
+            return;
         }
         Book book = bookOptional.get();
         bookRepo.delete(book);
-        return ResponseEntity.ok("Book deleted successfully");
     }
 }
