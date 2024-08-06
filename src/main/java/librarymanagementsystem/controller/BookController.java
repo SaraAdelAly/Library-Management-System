@@ -44,6 +44,7 @@ public class BookController {
     public ResponseEntity<BookDto> updateBook(@PathVariable Integer id, @RequestBody BookDto bookDetails) {
         try {
             BookDto updatedBook = bookService.updateBook(id, bookDetails);
+            System.out.println(updatedBook.getAuthor());
             return ResponseEntity.ok(updatedBook);
         } catch (BookNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

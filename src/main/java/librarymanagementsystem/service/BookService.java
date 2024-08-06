@@ -52,10 +52,13 @@ public class BookService {
             book.setAuthor(bookDetails.getAuthor());
             book.setIsbn(bookDetails.getIsbn());
             book.setPublicationYear(bookDetails.getPublicationYear());
+            book.setQuantity(bookDetails.getQuantity());
             return bookRepo.save(book);
         }).orElseThrow(() -> new BookNotFoundException(id));
+        System.out.println(updatedBook.getTitle());
         return bookMapper.toDto(updatedBook);
     }
+
 
 
     public void deleteBook (Integer id){

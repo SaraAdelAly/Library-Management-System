@@ -1,10 +1,7 @@
 package librarymanagementsystem.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Check;
 
 import java.io.Serializable;
@@ -39,6 +36,15 @@ public class Book implements Serializable {
 
     @OneToMany(mappedBy = "book")
     private Set<Borrowing> borrowings;
+
+    public Book(Integer bookId, String title, String author, String isbn, LocalDate publicationYear, Integer quantity) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.publicationYear = publicationYear;
+        this.quantity = quantity;
+    }
 
     @Override
     public boolean equals(Object o) {

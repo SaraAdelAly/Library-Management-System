@@ -34,8 +34,6 @@ public class BorrowingController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the request");
         }
     }
-
-
     @PutMapping("/return/{bookId}/patron/{patronId}")
     public ResponseEntity<String> returnBook(@PathVariable Integer bookId, @PathVariable Integer patronId) {
         try {

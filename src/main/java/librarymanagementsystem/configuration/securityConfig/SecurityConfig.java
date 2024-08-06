@@ -14,8 +14,8 @@
 ////        configureBasicAuthentication(httpSecurity);
 ////        httpSecurity.csrf(csrf -> csrf.disable())
 ////                .authorizeHttpRequests(auth -> auth
-////                        .requestMatchers("/fusion/**").authenticated()
-////                        .requestMatchers("/fusion/admin/**").hasAnyRole("Admin")
+////                        .requestMatchers("/api/**").authenticated()
+////                        .requestMatchers("/api/admin/**").hasAnyRole("Admin")
 ////                        .anyRequest().permitAll()
 ////                ).sessionManagement(session -> session
 ////                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -49,14 +49,15 @@ public class PatronService {
     }
 
 
-    public ResponseEntity<String> deletePatron (Integer id){
+    public void deletePatron (Integer id){
         Optional<Patron> patronOptional = patronRepo.findById(id);
         if (patronOptional.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            ResponseEntity.notFound().build();
+            return;
         }
         Patron patron= patronOptional.get();
         patronRepo.delete(patron);
-        return ResponseEntity.ok("Patron deleted successfully");
+        ResponseEntity.ok("Patron deleted successfully");
     }
 
 

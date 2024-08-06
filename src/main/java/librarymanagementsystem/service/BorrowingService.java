@@ -50,11 +50,10 @@ public class BorrowingService {
     }
 
 
-    //return date tomorrow ??????????
     @Transactional
     public void returnBook(Integer bookId, Integer patronId) {
         Book book = bookRepo.findById(bookId)
-                .orElseThrow(() -> new BookNotAvailableException("Book not found"));
+                .orElseThrow(() -> new BookNotFoundException(bookId));
 
         Patron patron = patronRepo.findById(patronId)
                 .orElseThrow(() -> new PatronNotFoundException(patronId));

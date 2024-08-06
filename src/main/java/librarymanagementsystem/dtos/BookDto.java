@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @Data
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class BookDto implements Serializable {
 
     @NotNull
@@ -28,4 +27,13 @@ public class BookDto implements Serializable {
     private LocalDate publicationYear;
     @NotNull
     private Integer quantity;
+
+    public BookDto(Integer bookId, String title, String author, String isbn, LocalDate publicationYear, Integer quantity) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.publicationYear = publicationYear;
+        this.quantity = quantity;
+    }
 }

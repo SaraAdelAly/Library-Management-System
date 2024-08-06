@@ -10,11 +10,6 @@ import java.time.LocalDate;
 public class PastDateValidator implements ConstraintValidator<PastDate, LocalDate> {
 
     @Override
-    public void initialize(PastDate constraintAnnotation) {
-        // Initialization code if needed
-    }
-
-    @Override
     public boolean isValid(LocalDate date, ConstraintValidatorContext context) {
         return DateUtils.isDateInPast(date);
     }

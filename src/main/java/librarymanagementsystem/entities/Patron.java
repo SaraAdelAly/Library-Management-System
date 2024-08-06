@@ -15,27 +15,35 @@ import java.util.Set;
 @NoArgsConstructor
 public class Patron implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer patronId;
 
-    @Column(name="name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column (name="email",nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name="phone_number",nullable = false)
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
 
-    @Column(name="gender")
+    @Column(name = "gender")
     private String gender;
 
 
     @OneToMany(mappedBy = "patron")
     private Set<Borrowing> borrowings;
 
+
+    public Patron(Integer patronId, String name, String email, String phoneNumber) {
+        this.patronId = patronId;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

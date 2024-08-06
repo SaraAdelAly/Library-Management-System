@@ -3,6 +3,7 @@ package librarymanagementsystem.utils.advice;
 import librarymanagementsystem.entities.Book;
 import librarymanagementsystem.service.BookService;
 import librarymanagementsystem.utils.exceptions.BookNotAvailableException;
+import librarymanagementsystem.utils.exceptions.BookNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -20,7 +21,7 @@ public class BookQuantityAspect {
     @Around(value = "execution(* librarymanagementsystem.service.BorrowingService.borrowBook(..)) && args(bookId, patronId)", argNames = "joinPoint,bookId,patronId")
     public Object aroundBorrowBook(ProceedingJoinPoint joinPoint, Integer bookId, Integer patronId) throws Throwable {
         Book book = bookService.findBook(bookId)
-                .orElseThrow(() -> new BookNotAvailableException("Book not found"));
+                .orElseThrow(() -> new BookNotFoundException(bookId));
 
         if (book.getQuantity() <= 0) {
             throw new BookNotAvailableException("Book is not available for borrowing");
